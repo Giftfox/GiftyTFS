@@ -1,0 +1,10 @@
+Module
+  name: game_jumpwindow
+  description: Test window
+  author: Gifty
+  website: 
+  sandboxed: true
+  dependencies: [ game_interface ]
+  scripts: [ jumpwindow ]
+  @onLoad: init()
+  @onUnload: terminate()
