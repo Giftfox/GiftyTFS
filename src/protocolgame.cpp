@@ -491,6 +491,10 @@ void ProtocolGame::parsePacket(NetworkMessage& msg)
 		case 0x1D: addGameTask(&Game::playerReceivePingBack, player->getID()); break;
 		case 0x1E: addGameTask(&Game::playerReceivePing, player->getID()); break;
 		case 0x32: parseExtendedOpcode(msg); break; //otclient extended opcode
+		case 0x34: addGameTask(&Game::internalTeleportAdjacent, player, DIRECTION_NORTH); break;
+		case 0x35: addGameTask(&Game::internalTeleportAdjacent, player, DIRECTION_EAST); break;
+		case 0x36: addGameTask(&Game::internalTeleportAdjacent, player, DIRECTION_SOUTH); break;
+		case 0x37: addGameTask(&Game::internalTeleportAdjacent, player, DIRECTION_WEST); break;
 		case 0x64: parseAutoWalk(msg); break;
 		case 0x65: addGameTask(&Game::playerMove, player->getID(), DIRECTION_NORTH); break;
 		case 0x66: addGameTask(&Game::playerMove, player->getID(), DIRECTION_EAST); break;

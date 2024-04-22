@@ -1771,6 +1771,35 @@ ReturnValue Game::internalTeleport(Thing* thing, const Position& newPos, bool pu
 	return RETURNVALUE_NOTPOSSIBLE;
 }
 
+ReturnValue Game::internalTeleportAdjacent(Thing* thing, Direction dir)
+{
+	if (Creature* creature = thing->getCreature())
+	{
+		// Get current position, and increment x or y by 1 depending on direction given
+		Position oldPos = thing->getPosition();
+		switch (dir)
+		{
+			case DIRECTION_NORTH: oldPos.y -= 1; break;
+			case DIRECTION_SOUTH: oldPos.y += 1; break;
+			case DIRECTION_WEST: oldPos.x -= 1; break;
+			case DIRECTION_EAST: oldPos.x += 1; break;
+		}
+		// Check to make sure the target tile is walkable, otherwise fail
+		Tile* tmpTile = map.getTile(oldPos.x, oldPos.y, oldPos.z);
+		if (tmpTile == nullptr || (!tmpTile->hasFlag(TILESTATE_BLOCKSOLID) && !creature->isMovementBlocked())) {
+			// Send the target thing to the new position immediately
+			return internalTeleport(thing, oldPos, false, 0);
+		}
+		// Send an error message if the movement fails
+		if (Player* player = creature->getPlayer())
+		{
+			player->sendCancelMessage(RETURNVALUE_NOROOMTODASH);
+		}
+		return RETURNVALUE_NOROOMTODASH;
+	}
+	return RETURNVALUE_NOTPOSSIBLE;
+}
+
 Item* searchForItem(Container* container, uint16_t itemId)
 {
 	for (ContainerIterator it = container->iterator(); it.hasNext(); it.advance()) {

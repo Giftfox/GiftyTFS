@@ -96,6 +96,11 @@ function bindKeys()
   bindTurnKey('Ctrl+Numpad2', South)
   bindTurnKey('Ctrl+Numpad4', West)
 
+  bindDashKey('Ctrl+Shift+Up', North)
+  bindDashKey('Ctrl+Shift+Right', East)
+  bindDashKey('Ctrl+Shift+Down', South)
+  bindDashKey('Ctrl+Shift+Left', West)
+
   g_keyboard.bindKeyPress('Escape', function() g_game.cancelAttackAndFollow() end, gameRootPanel)
   g_keyboard.bindKeyPress('Ctrl+=', function() gameMapPanel:zoomIn() end, gameRootPanel)
   g_keyboard.bindKeyPress('Ctrl+-', function() gameMapPanel:zoomOut() end, gameRootPanel)
@@ -128,6 +133,19 @@ function bindTurnKey(key, dir)
   end
 
   g_keyboard.bindKeyPress(key, callback, gameRootPanel)
+end
+
+function bindDashKey(key, dir)
+  -- When the keybind is pressed, send a request to the server to teleport the player to an adjacent position
+  -- Perform this action several times so the player moves several tiles at once, and schedule each unique execution so they happen with a small delay
+  g_keyboard.bindKeyUp(key, function()
+	for steps = 5, 0, -1 do
+		if dir == North then scheduleEvent(function() g_game.teleport(North) end, 50 * steps) end
+		if dir == East then scheduleEvent(function() g_game.teleport(East) end, 50 * steps) end
+		if dir == South then scheduleEvent(function() g_game.teleport(South) end, 50 * steps) end
+		if dir == West then scheduleEvent(function() g_game.teleport(West) end, 50 * steps) end
+	end
+  end, gameRootPanel)
 end
 
 function terminate()

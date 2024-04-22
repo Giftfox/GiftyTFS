@@ -307,6 +307,19 @@ void ProtocolGame::sendMove(const Position& fromPos, int thingId, int stackpos, 
     send(msg);
 }
 
+void ProtocolGame::sendTeleport(Otc::Direction dir)
+{
+	OutputMessagePtr msg(new OutputMessage);
+	switch (dir)
+	{
+		case Otc::Direction::North: msg->addU8(Proto::ClientTeleportNorth);
+		case Otc::Direction::East: msg->addU8(Proto::ClientTeleportEast);
+		case Otc::Direction::South: msg->addU8(Proto::ClientTeleportSouth);
+		case Otc::Direction::West: msg->addU8(Proto::ClientTeleportWest);
+	}
+	send(msg);
+}
+
 void ProtocolGame::sendInspectNpcTrade(int itemId, int count)
 {
     OutputMessagePtr msg(new OutputMessage);

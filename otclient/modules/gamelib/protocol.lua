@@ -123,6 +123,10 @@ ClientOpcodes = {
 
     -- NOTE: add any custom opcodes in this range
     -- 51 - 99
+	ClientTeleportNorth                 = 52,
+	ClientTeleportEast                  = 53,
+	ClientTeleportSouth                 = 54,
+	ClientTeleportWest                  = 55,
 
     -- original tibia ONLY
     ClientAutoWalk                      = 100,

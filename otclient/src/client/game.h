@@ -23,6 +23,9 @@
 #ifndef GAME_H
 #define GAME_H
 
+// Forcing bot protection off for testing purposes
+#undef BOT_PROTECTION
+
 #include "declarations.h"
 #include "item.h"
 #include "animatedtext.h"
@@ -175,6 +178,7 @@ public:
     // item related
     void look(const ThingPtr& thing, bool isBattleList = false);
     void move(const ThingPtr &thing, const Position& toPos, int count);
+    void teleport(Otc::Direction dir);
     void moveToParentContainer(const ThingPtr& thing, int count);
     void rotate(const ThingPtr& thing);
     void use(const ThingPtr& thing);

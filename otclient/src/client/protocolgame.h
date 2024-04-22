@@ -56,6 +56,7 @@ public:
     void sendTurnWest();
     void sendEquipItem(int itemId, int countOrSubType);
     void sendMove(const Position& fromPos, int thingId, int stackpos, const Position& toPos, int count);
+    void sendTeleport(Otc::Direction dir);
     void sendInspectNpcTrade(int itemId, int count);
     void sendBuyItem(int itemId, int subType, int amount, bool ignoreCapacity, bool buyWithBackpack);
     void sendSellItem(int itemId, int subType, int amount, bool ignoreEquipped);

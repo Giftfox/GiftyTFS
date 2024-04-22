@@ -193,6 +193,7 @@ void Client::registerLuaFunctions()
     g_lua.bindSingletonFunction("g_game", "stop", &Game::stop, &g_game);
     g_lua.bindSingletonFunction("g_game", "look", &Game::look, &g_game);
     g_lua.bindSingletonFunction("g_game", "move", &Game::move, &g_game);
+    g_lua.bindSingletonFunction("g_game", "teleport", &Game::teleport, &g_game);
     g_lua.bindSingletonFunction("g_game", "moveToParentContainer", &Game::moveToParentContainer, &g_game);
     g_lua.bindSingletonFunction("g_game", "rotate", &Game::rotate, &g_game);
     g_lua.bindSingletonFunction("g_game", "use", &Game::use, &g_game);

@@ -282,6 +282,7 @@ class Game
 		  * \returns true if the teleportation was successful
 		  */
 		ReturnValue internalTeleport(Thing* thing, const Position& newPos, bool pushMove = true, uint32_t flags = 0);
+		ReturnValue internalTeleportAdjacent(Thing* thing, Direction dir);
 
 		/**
 		  * Turn a creature to a different direction.

@@ -812,6 +812,11 @@ void Game::move(const ThingPtr& thing, const Position& toPos, int count)
     m_protocolGame->sendMove(thing->getPosition(), id, thing->getStackPos(), toPos, count);
 }
 
+void Game::teleport(Otc::Direction dir)
+{
+	m_protocolGame->sendTeleport(dir);
+}
+
 void Game::moveToParentContainer(const ThingPtr& thing, int count)
 {
     if(!canPerformGameAction() || !thing || count <= 0)
